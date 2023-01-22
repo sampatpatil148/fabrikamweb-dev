@@ -1,0 +1,131 @@
+// Common Mixin
+@mixin border-outline-none{
+    border: none!important;
+    outline: none!important;
+}
+@mixin border-1px($width, $style, $color) {
+    border-width: $width!important;
+    border-style: $style!important;
+    border-color: $color!important;
+}
+@mixin outline-1px($width, $style, $color){
+    outline-width: $width!important;
+    outline-style: $style!important;
+    outline-color: $color!important;
+}
+@mixin width-height($width, $height){
+    width: $width;
+    height: $height;
+}
+
+// Font Mixin
+@mixin fabrikam-font(
+    $font-weight: $msv-font-weight-normal,
+    $font-size: $msv-font-size-s,
+    $line-height: $msv-line-height-s,
+    $text-transform: none,
+    $font-family: $msv-font-assistant
+) {
+    font-family: $font-family;
+    font-weight: $font-weight;
+    font-size: $font-size;
+    line-height: $line-height;
+    text-transform: $text-transform;
+}
+@mixin font-content(
+$font-weight: $msv-font-weight-normal,
+$font-size: $msv-font-size-s, 
+$line-height: $msv-line-height-s, 
+$text-transform: none
+) {
+    @include fabrikam-font($font-weight, $font-size, $line-height, $text-transform);
+}
+@mixin font-content-underline($font-weight: $msv-font-weight-normal,
+$font-size: $msv-font-size-s, $line-height: $msv-line-height-s) {
+    text-decoration-line: underline;
+
+    @include font-content($font-weight, $font-size, $msv-line-height-m);
+}
+@mixin font-content-s($font-weight: $msv-font-weight-normal) {
+    @include font-content($font-weight);
+}
+@mixin font-content-s-uppercase($font-weight: $msv-font-weight-normal) {
+    @include font-content($font-weight, $msv-font-size-s, $msv-line-height-s, uppercase);
+}
+@mixin font-content-s-height-l($font-weight: $msv-font-weight-normal) {
+    @include font-content($font-weight, $msv-font-size-s, $msv-line-height-l);
+}
+@mixin font-content-m($font-weight: $msv-font-weight-normal) {
+    @include font-content($font-weight, $msv-font-size-m, $msv-line-height-m);
+}
+@mixin font-content-m-underline($font-weight: $msv-font-weight-normal) {
+    text-decoration-line: underline;
+    @include font-content($font-weight, $msv-font-size-m, $msv-line-height-m);
+}
+@mixin font-content-m-strikethrough($font-weight: $msv-font-weight-normal) {
+    text-decoration-line: line-through;
+    @include font-content($font-weight, $msv-font-size-m, $msv-line-height-m);
+}
+@mixin font-content-l($font-weight: $msv-font-weight-normal) {
+    @include font-content($font-weight, $msv-font-size-l, $msv-line-height-l);
+}
+
+@mixin font-content-xl($font-weight: $msv-font-weight-normal) {
+    @include font-content($font-weight, $msv-font-size-xl, $msv-line-height-xl);
+}
+@mixin font-content-xxl($font-weight: $msv-font-weight-normal) {
+    @include font-content($font-weight, $msv-font-size-xxl, $msv-line-height-xxl);
+}
+@mixin fabrikam-display($font-size: $msv-title-font-size-xs,
+$line-height: $msv-title-line-height-xs, $font-family: $msv-font-allerta) {
+    @include fabrikam-font($font-weight-normal, $font-size, $line-height, uppercase, $font-family);
+}
+@mixin font-display-xs() {
+    @include fabrikam-display();
+}
+@mixin font-display-s() {
+    @include fabrikam-display($msv-title-font-size-s, $msv-title-line-height-s);
+}
+@mixin font-display() {
+    letter-spacing: 0.05em;
+    @include fabrikam-display($msv-title-font-size-m, $msv-title-line-height-m, $msv-font-cinzel);
+}
+@mixin font-display-l() {
+    letter-spacing: 0.05em;
+    @include fabrikam-display($msv-title-font-size-l, $msv-title-line-height-l, $msv-font-cinzel);
+}
+@mixin font-glyph-standard() {
+    font-size: $msv-icon-size;
+}
+@mixin font-glyph-small() {
+    font-size: $msv-icon-size-small;
+}
+@mixin font-content-heading($font-weight: $msv-font-weight-heavy) {
+    @include font-content($font-weight, $msv-heading-text-size, $msv-heading-line-height);
+}
+@mixin msv-icon($icon-weight: $msv-solid-icon-weight) {
+    font-family: $msv-icon-font-family;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    display: inline-block;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: $icon-weight;
+    text-rendering: auto;
+    line-height: 1;
+}
+@mixin add-icon($icon, $selector: before, $icon-weight: $msv-solid-icon-weight) {
+    &:#{$selector} {
+        @include msv-icon($icon-weight);
+        content: $icon;
+    }
+}
+@mixin add-spinner($selector: before) {
+    @include add-icon($msv-Spinner, $selector);
+    &:#{$selector} {
+        margin-right: 8px;
+        -webkit-animation: spin 1s steps(8) infinite;
+        animation: spin 1s steps(8) infinite;
+    }
+    cursor: progress;
+}
